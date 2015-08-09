@@ -1,7 +1,7 @@
-User.create!(name:  "Example User",
-             email: "example@railstutorial.org",
-             password:              "foobar",
-             password_confirmation: "foobar",
+User.create!(name:  "Hugo Hernani",
+             email: "hhernanni@gmail.com",
+             password:              "password",
+             password_confirmation: "password",
              admin: true,
              activated: true,
              activated_at: Time.zone.now)
@@ -25,3 +25,11 @@ users = User.order(:created_at).take(6)
     user.microposts.create!(content: content)
   end
 end
+
+# Following relationships
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
